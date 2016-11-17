@@ -1,26 +1,158 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="Tizen Mobile Web Basic Template" />
-
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-    <title>MAMMA</title>
-
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<link href="css/font.css" rel="stylesheet">
+<link href="css/nouislider.min.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"
+	media="screen,projection" />
+<link rel="stylesheet" href="./lib/tau/mobile/theme/default/tau.css">
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+<title>Mamma</title>
 </head>
 
 <body>
+	<!-- Start of first page: #one -->
+	<div class="ui-page" id="mamma">
+		<div class="ui-header main-title">
+			<h1>Mamma</h1>
+		</div>
+		<!-- /header -->
+
+		<div class="ui-content ">
+
+			<div class="container valign-wrapper page" id="babies">
+				<a class="btn-floating waves-effect waves-light babybtn"
+					href="#luo2"><img class="responsive-img" src="images/face1.png" /></a>
+				<a class="btn-floating waves-effect waves-light babybtn"><img
+					class="responsive-img" src="images/face2.png" /></a> <a
+					class="btn-floating waves-effect waves-light babybtn"><img
+					class="responsive-img" src="images/face3.png" /></a> <a
+					class="btn-floating waves-effect waves-light babybtn"
+					href="#modal1"><i class="material-icons fat-icon">add</i></a>
+			</div>
+
+		</div>
+		<!-- /content -->
+	</div>
+	<!-- /page one -->
 
 
+	<!-- Start of second page: #two -->
+	<div class="ui-page" id="luo2">
+		<div class="ui-header">
+			<nav>
+				<div class="nav-wrapper">
+					<div class="col s12">
+						<a href="#mamma" class="breadcrumb">Mamma</a> <a href="#!" class="breadcrumb">Luo</a>
+					</div>
+				</div>
+			</nav>
+			<div class="container">
+				<div class="row">
+					<div class="col s4">
+						<img src="images/face1.png" class="responsive-img circle">
+					</div>
+					<div class="col s8"></div>
+				</div>
+			</div>
+		</div>
+		<div class="ui-content">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<ul class="collection">
+							<li class="collection-item avatar">
+								<div class="circle">기상</div> <span class="title">07:00</span>
+							</li>
+							<li class="collection-item avatar">
+								<div class="circle">밥</div> <span class="title">08:00</span>
+							</li>
+							<li class="collection-item avatar">
+								<div class="circle">응가</div> <span class="title">09:00</span>
+							</li>
+							<li class="collection-item avatar">
+								<div class="circle">밥</div> <span class="title">12:00</span>
+							</li>
+							<li class="collection-item avatar">
+								<div class="circle">간식</div> <span class="title">15:00</span>
+							</li>
+							<li class="collection-item avatar">
+								<div class="circle">밥</div> <span class="title">18:00</span>
+							</li>
+							<li class="collection-item avatar">
+								<div class="circle">응가</div> <span class="title">19:00</span>
+							</li>
+							<li class="collection-item avatar">
+								<div class="circle">잠</div> <span class="title">21:00</span>
+							</li>
+						</ul>
 
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /content -->
+		<div class="ui-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col s6">
+						<a class="btn-floating btn-large waves-effect waves-light red"><i
+							class="material-icons">mode_edit</i></a>
+					</div>
+					<div class="col s6">
+						<a class="btn-floating btn-large waves-effect waves-light purple"><i
+							class="material-icons">mic</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page two -->
+
+	<div id="modal1" class="modal">
+		<div class="modal-content">
+			<div class="row">
+				<form class="col s12">
+					<div class="row">
+						<div class="input-field col s12">
+							<input placeholder="Name" id="name" type="text" class="validate">
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input disabled id="age" type="text" class="validate"> <label
+								for="age">Age</label>
+							<div class="sliders" id="ageslider"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<select>
+								<option value="" disabled selected>Sex</option>
+								<option value="1">Male</option>
+								<option value="2">Female</option>
+							</select>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/nouislider.min.js"></script>
+	<script type="text/javascript" src="./lib/tau/mobile/js/tau.js"></script>
+	<script type="text/javascript" src="js/moment.min.js"></script>
+	<script type="text/javascript" src="js/db.js"></script>
+
+	<script src="./js/main.js"></script>
 </body>
-
 </html>

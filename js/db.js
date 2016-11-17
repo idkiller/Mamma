@@ -46,7 +46,7 @@ DB.init = function(callback) {
 	if (window.openDatabase) {
 		database = openDatabase(DB_NAME, DB_VERSION, DB_DISPLAY_NAME, DB_SIZE, function(db) {
 			// Create Tables
-			createTables(db);
+			DB.createTables(db);
 			
 			// Insert Dummy Data
 			db.transaction(function(t) {

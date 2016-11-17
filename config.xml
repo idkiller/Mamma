@@ -6,4 +6,5 @@
     <icon src="icon.png"/>
     <name>Mamma</name>
     <tizen:profile name="mobile"/>
+    <tizen:setting screen-orientation="portrait" context-menu="disable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
 </widget>
