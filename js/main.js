@@ -21,13 +21,14 @@
     	DB.init(function(){
     		var onSelect = function(rows) {
         		console.debug(rows);
-
-        		//$("#babies").append(
-        			//	$('<a class="btn-floating waves-effect waves-light babybtn"><img class="responsive-img" src="images/face1.png"/></a>'));
+        		for (var i=0; i < rows.length; i++) {
+        			$("#babies").prepend(
+        					$('<a class="btn-floating waves-effect waves-light babybtn" href="#luo2"><img class="responsive-img" src="' + rows.item(i).photo + '"/></a>'));
+        		}
         	}
         	
         	DB.getBabies(onSelect);
-    	});
+    	});    	
     }
     
     $(document).ready(function(){

@@ -49,21 +49,25 @@ DB.init = function(callback) {
 			DB.createTables(db);
 			
 			// Insert Dummy Data
-			db.transaction(function(t) {
-				t.executeSql("INSERT INTO baby (name, birth, sex) VALUES(?, ?, ?)", ["Siyun", "2015-06-30", 2], onSuccess, onError);
-				t.executeSql("INSERT INTO baby (name, birth, sex) VALUES(?, ?, ?)", ["Luo", "2014-10-19", 1], onSuccess, onError);
-			});
+			DB.insertInitialData(db);
 			
 			if (callback) callback();			
 		});
 		
 		database.transaction(function(t) {
-			// Test if the table is created.
+			// Check whether the table is created or not.
 			t.executeSql("SELECT * FROM baby", [], function(tr, r) {
 				if (callback) callback();
 			});
 		});
 	}
+};
+
+DB.insertInitialData = function(db) {
+	db.transaction(function(t) {
+		t.executeSql("INSERT INTO baby (name, birth, sex, photo) VALUES(?, ?, ?, ?)", ["Siyun", "2015-06-30", 2, "images/siyun.png"], onSuccess, onError);
+		t.executeSql("INSERT INTO baby (name, birth, sex, photo) VALUES(?, ?, ?, ?)", ["Luo", "2014-10-19", 1, "images/luo.png"], onSuccess, onError);
+	});
 };
 
 DB.createTables = function(db) {
@@ -82,7 +86,7 @@ DB.dropTables = function() {
 
 DB.getBabies = function(callback) {
 	database.transaction(function(t) {
-		t.executeSql("SELECT * FROM baby ORDER BY birth", [], function(tr, ret) {
+		t.executeSql("SELECT * FROM baby ORDER BY birth DESC", [], function(tr, ret) {
 			if (callback) {
 				callback(ret.rows);
 			}
