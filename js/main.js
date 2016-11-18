@@ -20,15 +20,42 @@
     function page1_init() {
     	DB.init(function(){
     		var onSelect = function(rows) {
-        		console.debug(rows);
         		for (var i=0; i < rows.length; i++) {
+        			var baby_id = rows.item(i).id;
+        			var baby_photo = rows.item(i).photo;
         			$("#babies").prepend(
-        					$('<a class="btn-floating waves-effect waves-light babybtn" href="#luo2"><img class="responsive-img" src="' + rows.item(i).photo + '"/></a>'));
+        					$('<a id="baby_' + baby_id + '" class="btn-floating waves-effect waves-light babybtn" href="#daily_sheet"><img class="responsive-img" src="' + baby_photo + '"/></a>'));
+        			$("#baby_" + baby_id).click(rows.item(i), show_daily_sheet);
         		}
         	}
         	
         	DB.getBabies(onSelect);
     	});    	
+    }
+    
+    function show_daily_sheet(event) {
+    	// navibar
+    	$("#daily_sheet_navi").empty();
+    	$("#daily_sheet_navi").append(
+    			$('<a href="#mamma" class="breadcrumb">Mamma</a> <a href="#!" class="breadcrumb">' + event.data.name + '</a>'));	
+    	
+    	// photo
+    	$("#daily_sheet_photo").empty();
+    	$("#daily_sheet_photo").append(
+    			$('<img src="' + event.data.photo + '" class="responsive-img circle">'));
+    	
+    	// events
+    	$("#daily_sheet_events").empty();
+    	var date = moment(new Date()).format("YYYY-MM-DD");
+    	DB.getEventsOfDay(event.data.id, date, function(rows) {
+    		console.log("event rows : " + rows.length);
+    		for (var i=0; i < rows.length; i++) {
+    			var ev_title = EVENT_TYPE[rows.item(i).event_type].title;
+    			var ev_time = moment(new Date(rows.item(i).event_time)).format("HH:mm");
+    			$("#daily_sheet_events").append(
+    					$('<li class="collection-item avatar"><div class="circle">' + ev_title +'</div> <span class="title">' + ev_time + '</span></li>'));
+    		}  
+    	});
     }
     
     $(document).ready(function(){

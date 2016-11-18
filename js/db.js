@@ -18,9 +18,19 @@ const SCHEMA_EVENT =
 		"CREATE TABLE IF NOT EXISTS event (" +
 		"	id INTEGER PRIMARY KEY ASC," +
 		"	baby_id INTEGER," +
-		"	event_type INTEGER," +
+		"	event_type TEXT," +
 		"	event_time DATETIME," +
 		"	event_value TEXT)";
+
+const EVENT_TYPE = {"wakeup": {title: "기상", category: "sleep"},
+                    "mothermilk": {title: "모유", cateogry: "food"},
+                    "drymilk": {title: "분유", category: "food"},
+                    "milk": {title: "우유", category: "food"},
+                    "babyfood": {title: "이유식", category: "food"},
+                    "meal": {title: "밥", category: "food"},
+                    "betweenfood": {title: "간식", category: "food"},
+                    "poopoo": {title: "응가", category: "poopoo"},
+                    "gotobed": {title: "취침", category: "sleep"}};
 
 function onSuccess(t, e) {
 }
@@ -65,8 +75,18 @@ DB.init = function(callback) {
 
 DB.insertInitialData = function(db) {
 	db.transaction(function(t) {
-		t.executeSql("INSERT INTO baby (name, birth, sex, photo) VALUES(?, ?, ?, ?)", ["Siyun", "2015-06-30", 2, "images/siyun.png"], onSuccess, onError);
-		t.executeSql("INSERT INTO baby (name, birth, sex, photo) VALUES(?, ?, ?, ?)", ["Luo", "2014-10-19", 1, "images/luo.png"], onSuccess, onError);
+		t.executeSql("INSERT INTO baby (id, name, birth, sex, photo) VALUES(?, ?, ?, ?, ?)", [1, "Siyun", "2015-06-30", 2, "images/siyun.png"], onSuccess, onError);
+		t.executeSql("INSERT INTO baby (id, name, birth, sex, photo) VALUES(?, ?, ?, ?, ?)", [2, "Luo", "2014-10-19", 1, "images/luo.png"], onSuccess, onError);
+		t.executeSql("INSERT INTO event (baby_id, event_type, event_time, event_value) VALUES(?, ?, ?, ?)",
+				[1, "wakeup", "2016-11-18 07:00", ""], onSuccess, onError);
+		t.executeSql("INSERT INTO event (baby_id, event_type, event_time, event_value) VALUES(?, ?, ?, ?)",
+				[1, "drymilk", "2016-11-18 07:00", 180], onSuccess, onError);	
+		t.executeSql("INSERT INTO event (baby_id, event_type, event_time, event_value) VALUES(?, ?, ?, ?)",
+				[1, "drymilk", "2016-11-18 12:00", 220], onSuccess, onError);	
+		t.executeSql("INSERT INTO event (baby_id, event_type, event_time, event_value) VALUES(?, ?, ?, ?)",
+				[1, "poopoo", "2016-11-18 13:00", ""], onSuccess, onError);	
+		t.executeSql("INSERT INTO event (baby_id, event_type, event_time, event_value) VALUES(?, ?, ?, ?)",
+				[1, "drymilk", "2016-11-18 16:00", 240], onSuccess, onError);	
 	});
 };
 
