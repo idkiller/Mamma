@@ -53,33 +53,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col s12">
-						<ul class="collection" id="daily_sheet_events">
-							<li class="collection-item avatar">
-								<div class="circle">기상</div> <span class="title">07:00</span>
-							</li>
-							<li class="collection-item avatar">
-								<div class="circle">밥</div> <span class="title">08:00</span>
-							</li>
-							<li class="collection-item avatar">
-								<div class="circle">응가</div> <span class="title">09:00</span>
-							</li>
-							<li class="collection-item avatar">
-								<div class="circle">밥</div> <span class="title">12:00</span>
-							</li>
-							<li class="collection-item avatar">
-								<div class="circle">간식</div> <span class="title">15:00</span>
-							</li>
-							<li class="collection-item avatar">
-								<div class="circle">밥</div> <span class="title">18:00</span>
-							</li>
-							<li class="collection-item avatar">
-								<div class="circle">응가</div> <span class="title">19:00</span>
-							</li>
-							<li class="collection-item avatar">
-								<div class="circle">잠</div> <span class="title">21:00</span>
-							</li>
+						<ul class="collection" id="daily_sheet_events">							
 						</ul>
-
 					</div>
 				</div>
 			</div>
@@ -93,7 +68,7 @@
 							class="material-icons">mode_edit</i></a>
 					</div>
 					<div class="col s6">
-						<a class="btn-floating btn-large waves-effect waves-light purple"><i
+						<a id="daily_sheet_memo_btn" class="btn-floating btn-large waves-effect waves-light purple" href="#memo_sketch"><i
 							class="material-icons">mic</i></a>
 					</div>
 				</div>
@@ -101,6 +76,54 @@
 		</div>
 	</div>
 	<!-- /page two -->
+	
+	
+	
+	<!-- Start of third page: #memo_scatch -->
+	<div class="ui-page" id="memo_sketch">
+		<div class="ui-header">
+			<nav>
+				<div class="nav-wrapper">
+					<div class="col s12" id="memo_sketch_navi">
+						<a href="#mamma" class="breadcrumb">Mamma</a> <a href="#daily_sheet" class="breadcrumb">Siyun</a> <a href="#!" class="breadcrumb">Memo</a>
+					</div>
+				</div>
+			</nav>
+			<div class="container">
+				<div class="row">
+					<div class="col s4" id="memo_sketch_photo">
+					</div>
+					<div class="col s8"></div>
+				</div>
+			</div>
+		</div>
+		<div class="ui-content">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<textarea id="memo_sketch_textarea" style="width:100%; height:100%"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /content -->
+		<div class="ui-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col s6">
+						<a class="btn-floating btn-large waves-effect waves-light red"><i
+							class="material-icons" id="memo_sketch_done">done</i></a>
+					</div>
+					<div class="col s6">
+						<a class="btn-floating btn-large waves-effect waves-light purple" href="#daily_sheet"><i
+							class="material-icons">cancel</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page third -->
+	
 
 	<div id="modal1" class="modal">
 		<div class="modal-content">
@@ -143,6 +166,7 @@
 	<script type="text/javascript" src="./lib/tau/mobile/js/tau.js"></script>
 	<script type="text/javascript" src="js/moment.min.js"></script>
 	<script type="text/javascript" src="js/db.js"></script>
+	
 
 	<script src="./js/main.js"></script>
 </body>

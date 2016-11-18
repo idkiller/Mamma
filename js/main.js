@@ -1,3 +1,5 @@
+var current_baby = {};
+
 ( function () {
     window.addEventListener( 'tizenhwkey', function( ev ) {
         if( ev.keyName === "back" ) {
@@ -30,10 +32,26 @@
         	}
         	
         	DB.getBabies(onSelect);
-    	});    	
+    	});
+    }
+    
+    function load_events_of_current_baby() {
+    	$("#daily_sheet_events").empty();
+    	var date = moment(new Date()).format("YYYY-MM-DD");
+    	DB.getEventsOfDay(current_baby.id, date, function(rows) {
+    		console.log("event rows : " + rows.length);
+    		for (var i=0; i < rows.length; i++) {
+    			var ev_title = EVENT_TYPE[rows.item(i).event_type].title;
+    			var ev_time = moment(new Date(rows.item(i).event_time)).format("HH:mm");
+    			$("#daily_sheet_events").append(
+    					$('<li class="collection-item avatar"><div class="circle">' + ev_title +'</div> <span class="title">' + ev_time + '</span></li>'));
+    		}
+    	});
     }
     
     function show_daily_sheet(event) {
+    	current_baby = event.data;
+    	
     	// navibar
     	$("#daily_sheet_navi").empty();
     	$("#daily_sheet_navi").append(
@@ -44,17 +62,40 @@
     	$("#daily_sheet_photo").append(
     			$('<img src="' + event.data.photo + '" class="responsive-img circle">'));
     	
+    	// button
+    	$("#daily_sheet_memo_btn").click(event.data, show_memo_page);
+    	
     	// events
-    	$("#daily_sheet_events").empty();
-    	var date = moment(new Date()).format("YYYY-MM-DD");
-    	DB.getEventsOfDay(event.data.id, date, function(rows) {
-    		console.log("event rows : " + rows.length);
-    		for (var i=0; i < rows.length; i++) {
-    			var ev_title = EVENT_TYPE[rows.item(i).event_type].title;
-    			var ev_time = moment(new Date(rows.item(i).event_time)).format("HH:mm");
-    			$("#daily_sheet_events").append(
-    					$('<li class="collection-item avatar"><div class="circle">' + ev_title +'</div> <span class="title">' + ev_time + '</span></li>'));
-    		}  
+    	load_events_of_current_baby();
+    }
+    
+    function show_memo_page(event) {
+    	
+    	// navibar
+    	$("#memo_sketch_navi").empty();
+    	$("#memo_sketch_navi").append(
+    			$('<a href="#mamma" class="breadcrumb">Mamma</a> <a href="#daily_sheet" class="breadcrumb">' + current_baby.name + '</a><a href="#!" class="breadcrumb">Memo</a>'));	
+
+    	// textarea
+    	$("#memo_sketch_textarea").val('');
+    	
+    	// button
+    	$("#memo_sketch_done").click(event.data, save_memo);
+    }
+    
+    function save_memo(event) {
+    	var e = {};
+    	e["baby_id"] = current_baby.id;
+    	e["event_type"] = "memo";
+    	e["event_time"] = moment(new Date()).format("YYYY-MM-DD HH:mm");
+    	e["event_value"] = $("memo_sketch_textarea").val();
+    	
+    	DB.addEvent(e, function() {
+    		load_events_of_current_baby();
+    		window.location.href="#daily_sheet";
+    	}, function(err) {
+    		console.log(err.message);
+    		alert(err.message);
     	});
     }
     
@@ -76,6 +117,7 @@
     	});
     	
     	page1_init();
+    
 //    	setTimeout(page1_init, 50);
     });
     
